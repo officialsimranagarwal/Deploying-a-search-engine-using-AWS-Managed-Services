@@ -1,0 +1,12 @@
+What are you expected to do?
+Steps for implementation
+A. Create an AWS Opensearch domain
+B. Download the deployment package files for the 4 Lambda functions provided along
+with this document on Olympus.
+C. Deploy these packages on CodePipeline using the SAM and buildspec files provided
+in the zipped package files after configuring the Lambda functions.
+D. Set up triggers for each of the Lambda functions created in the previous step
+E. Set up an API Gateway to access the Opensearch domain via the Lambda function
+‘search-gateway’
+F. Upload the sample PDF file provided into the S3 bucket document store to
+chain-trigger the Lambda functions
