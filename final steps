@@ -1,0 +1,18 @@
+Final Steps
+1. Ensure that the IAM role attached to the Lambda functions pdftotxt and
+upload-to-search have permissions for S3 access
+2. Ensure that the IAM role attached to the Lambda functions upload-to-search and
+searchFunction have permissions for Opensearch access. For searchFunction, use the
+same IAM role created as part of the Opensearch setup.
+3. Ensure that the triggers for all the Lambda functions have been configured as
+described in their individual sections in this document
+
+Testing the deployment
+1. Upload the test PDF file provided with this document to the document store bucket
+created previously.
+2. Wait for a few minutes for each function to trigger in succession. Progress of each
+function can be monitored using the respective Cloudwatch log groups.
+3. Access the search webpage by visiting the “invoke URL” of the API Gateway created
+previously.
+4. Search for any word in the sample PDF document and check for correctness in the
+output provided
