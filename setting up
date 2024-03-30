@@ -1,0 +1,41 @@
+Setting up CodeCommit
+1. Create a CodeCommit repository using the AWS console
+2. Create an IAM user with programmatic access. Generate a set of CodeCommit
+credentials for this user and note them down.
+3. Install Git on your local machine. We recommend installing the Gitbash terminal to
+have a Git-ready environment.
+4. Create an empty directory in your local machine and navigate to it using the terminal.
+5. Use the git clone command and the HTTPS URL of the repository to set up the remote
+repository. Enter the credentials generated in Step 2 in this page when prompted.
+6. Copy the Lambda function files into the directory created in Step 4. This includes the
+buildspec and SAM files as well. Use the git add, git commit and git push commands
+to push the files into the repository.
+
+Setting up CodeBuild
+1. Create a new CodeBuild project using the AWS console
+2. Ensure that the project uses CodeCommit as the source. Select the repository
+created previously
+3. Use the latest Standard Ubuntu CodeBuild 6.0 environment for the build
+environment.
+4. Make sure to create a new service role for the project.
+5. Create a new S3 bucket and use this bucket to store artifacts for the project.
+
+Setting up CodePipeline
+1. Create a new pipeline using the AWS console
+2. Select the CodeCommit repository created previously as the source for this pipeline
+3. Select the CodeBuild project created previously for the build stage
+4. Use CloudFormation as the deployment platform.Ensure that the IAM role used for
+CloudFormation has access to S3 and AWS Lambda and the following capabilities,
+CAPABILITY_IAM and CAPABILITY_AUTO_EXPAND are added to the list of
+CloudFormation’s capabilities
+5. Run the pipeline to deploy the Lambda function
+6. Set up separate CodeCommit repositories, CodeBuildprojects and pipelines for each
+of the Lambda functions provided.
+
+Setting up API Gateway
+1. Create a new HTTP Gateway using the AWS console
+2. Under Integrations,add the Lambda functions search-gateway and searchFunction
+3. Under Routes, add the following routes
+○ Method : Any, Route : / , Integration Target : search-gateway
+○ Method : Any, Route : /search , Integration Target : searchFunction
+
